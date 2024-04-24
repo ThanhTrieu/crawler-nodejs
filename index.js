@@ -13,7 +13,9 @@ app.set("view engine", "liquid");
 // Import the router module
 // Use the router for all routes
 const router = require("./routes/routes.js");
+const api = require("./routes/api.js");
 app.use("/", router);
+app.use("/api/v1/",api);
 
 // Start the server and listen on port 3000
 app.listen(3000, () => {
