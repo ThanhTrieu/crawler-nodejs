@@ -10,7 +10,8 @@ route.post("/coffe-arabica", crawler.coffeArabica);
 route.post("/coffe-arabica-braxin", crawler.coffeArabicaBraxin);
 route.post("/oil-price", crawler.oilPrice);
 route.post("/world-oil-prices", crawler.worldOilPrices);
-// route.post("/exchange-rate", crawler.exchangeRate);
+route.post("/gold-price-doji", crawler.goldPriceDoji);
+route.post("/exchange-rate-vietcombank", crawler.exchangeRateVietcomBank);
 
 // register another routes here
 
