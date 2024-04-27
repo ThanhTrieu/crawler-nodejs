@@ -178,6 +178,195 @@ const exchangeRateVietcomBank = async (req, res) => {
   res.json({data});
 }
 
+const goldPriceSinhDien = async(req, res) => {
+  const url = `${URLsToVisit}gia-vang.html`;
+  const pageHTML = await axios.get(url);
+  // initializing cheerio on the current webpage
+  const $ = cheerio.load(pageHTML.data);
+  let data = [];
+  $('div.blog__content div.table-responsive:nth(7) table tbody tr:not(:last-child)').each((index, element) => {
+    const system = $(element).find('td:first').text().trim();
+    const type  = $(element).find('td:nth-child(2)').text().trim();
+
+    const buyingPriceTag = $(element).find('td:nth-child(3) span').parent().contents();
+    const buyingPrice = $(buyingPriceTag[Array.prototype.findIndex.call(buyingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const buyingPriceUp = $(element).find('td:nth-child(3) span.text-success.small').text().trim();
+    const buyingPriceDown = $(element).find('td:nth-child(3) span.text-danger.small').text().trim();
+    const buyingPriceNotChange = $(element).find('td:nth-child(3) span.text-warning.small').text().trim();
+
+    const sellingPriceTag =  $(element).find('td:nth-child(4) span').parent().contents();
+    const sellingPrice = $(sellingPriceTag[Array.prototype.findIndex.call(sellingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const sellingPriceUp =  $(element).find('td:nth-child(4) span.text-success.small').text().trim();
+    const sellingPriceDown =  $(element).find('td:nth-child(4) span.text-danger.small').text().trim();
+    const sellingPriceNotChange = $(element).find('td:nth-child(4) span.text-warning.small').text().trim();
+
+    data.push({ system, type, buyingPrice, buyingPriceUp, buyingPriceDown, buyingPriceNotChange, sellingPrice, sellingPriceUp, sellingPriceDown, sellingPriceNotChange });
+  });
+  res.json({data});
+}
+
+const goldPriceNgocTham = async(req, res) => {
+  const url = `${URLsToVisit}gia-vang.html`;
+  const pageHTML = await axios.get(url);
+  // initializing cheerio on the current webpage
+  const $ = cheerio.load(pageHTML.data);
+  let data = [];
+  $('div.blog__content div.table-responsive:nth(6) table tbody tr:not(:last-child)').each((index, element) => {
+    const system = $(element).find('td:first').text().trim();
+    const type  = $(element).find('td:nth-child(2)').text().trim();
+
+    const buyingPriceTag = $(element).find('td:nth-child(3) span').parent().contents();
+    const buyingPrice = $(buyingPriceTag[Array.prototype.findIndex.call(buyingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const buyingPriceUp = $(element).find('td:nth-child(3) span.text-success.small').text().trim();
+    const buyingPriceDown = $(element).find('td:nth-child(3) span.text-danger.small').text().trim();
+    const buyingPriceNotChange = $(element).find('td:nth-child(3) span.text-warning.small').text().trim();
+
+    const sellingPriceTag =  $(element).find('td:nth-child(4) span').parent().contents();
+    const sellingPrice = $(sellingPriceTag[Array.prototype.findIndex.call(sellingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const sellingPriceUp =  $(element).find('td:nth-child(4) span.text-success.small').text().trim();
+    const sellingPriceDown =  $(element).find('td:nth-child(4) span.text-danger.small').text().trim();
+    const sellingPriceNotChange = $(element).find('td:nth-child(4) span.text-warning.small').text().trim();
+
+    data.push({ system, type, buyingPrice, buyingPriceUp, buyingPriceDown, buyingPriceNotChange, sellingPrice, sellingPriceUp, sellingPriceDown, sellingPriceNotChange });
+  });
+  res.json({data});
+}
+
+const goldPricePNJ = async(req, res) => {
+  const url = `${URLsToVisit}gia-vang.html`;
+  const pageHTML = await axios.get(url);
+  // initializing cheerio on the current webpage
+  const $ = cheerio.load(pageHTML.data);
+  let data = [];
+  $('div.blog__content div.table-responsive:nth(5) table tbody tr:not(:last-child)').each((index, element) => {
+    const system = $(element).find('td:first').text().trim();
+    const type  = $(element).find('td:nth-child(2)').text().trim();
+
+    const buyingPriceTag = $(element).find('td:nth-child(3) span').parent().contents();
+    const buyingPrice = $(buyingPriceTag[Array.prototype.findIndex.call(buyingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const buyingPriceUp = $(element).find('td:nth-child(3) span.text-success.small').text().trim();
+    const buyingPriceDown = $(element).find('td:nth-child(3) span.text-danger.small').text().trim();
+    const buyingPriceNotChange = $(element).find('td:nth-child(3) span.text-warning.small').text().trim();
+
+    const sellingPriceTag =  $(element).find('td:nth-child(4) span').parent().contents();
+    const sellingPrice = $(sellingPriceTag[Array.prototype.findIndex.call(sellingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const sellingPriceUp =  $(element).find('td:nth-child(4) span.text-success.small').text().trim();
+    const sellingPriceDown =  $(element).find('td:nth-child(4) span.text-danger.small').text().trim();
+    const sellingPriceNotChange = $(element).find('td:nth-child(4) span.text-warning.small').text().trim();
+
+    data.push({ system, type, buyingPrice, buyingPriceUp, buyingPriceDown, buyingPriceNotChange, sellingPrice, sellingPriceUp, sellingPriceDown, sellingPriceNotChange });
+  });
+  res.json({data});
+}
+
+const goldPriceSJC = async(req, res) => {
+  const url = `${URLsToVisit}gia-vang.html`;
+  const pageHTML = await axios.get(url);
+  // initializing cheerio on the current webpage
+  const $ = cheerio.load(pageHTML.data);
+  let data = [];
+  $('div.blog__content div.table-responsive:nth(4) table tbody tr:not(:last-child)').each((index, element) => {
+    const system = $(element).find('td:first').text().trim();
+    const type  = $(element).find('td:nth-child(2)').text().trim();
+
+    const buyingPriceTag = $(element).find('td:nth-child(3) span').parent().contents();
+    const buyingPrice = $(buyingPriceTag[Array.prototype.findIndex.call(buyingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const buyingPriceUp = $(element).find('td:nth-child(3) span.text-success.small').text().trim();
+    const buyingPriceDown = $(element).find('td:nth-child(3) span.text-danger.small').text().trim();
+    const buyingPriceNotChange = $(element).find('td:nth-child(3) span.text-warning.small').text().trim();
+
+    const sellingPriceTag =  $(element).find('td:nth-child(4) span').parent().contents();
+    const sellingPrice = $(sellingPriceTag[Array.prototype.findIndex.call(sellingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const sellingPriceUp =  $(element).find('td:nth-child(4) span.text-success.small').text().trim();
+    const sellingPriceDown =  $(element).find('td:nth-child(4) span.text-danger.small').text().trim();
+    const sellingPriceNotChange = $(element).find('td:nth-child(4) span.text-warning.small').text().trim();
+
+    data.push({ system, type, buyingPrice, buyingPriceUp, buyingPriceDown, buyingPriceNotChange, sellingPrice, sellingPriceUp, sellingPriceDown, sellingPriceNotChange });
+  });
+  res.json({data});
+}
+
+const goldPriceNgocHai = async(req, res) => {
+  const url = `${URLsToVisit}gia-vang.html`;
+  const pageHTML = await axios.get(url);
+  // initializing cheerio on the current webpage
+  const $ = cheerio.load(pageHTML.data);
+  let data = [];
+  $('div.blog__content div.table-responsive:nth(3) table tbody tr:not(:last-child)').each((index, element) => {
+    const system = $(element).find('td:first').text().trim();
+    const type  = $(element).find('td:nth-child(2)').text().trim();
+
+    const buyingPriceTag = $(element).find('td:nth-child(3) span').parent().contents();
+    const buyingPrice = $(buyingPriceTag[Array.prototype.findIndex.call(buyingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const buyingPriceUp = $(element).find('td:nth-child(3) span.text-success.small').text().trim();
+    const buyingPriceDown = $(element).find('td:nth-child(3) span.text-danger.small').text().trim();
+    const buyingPriceNotChange = $(element).find('td:nth-child(3) span.text-warning.small').text().trim();
+
+    const sellingPriceTag =  $(element).find('td:nth-child(4) span').parent().contents();
+    const sellingPrice = $(sellingPriceTag[Array.prototype.findIndex.call(sellingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const sellingPriceUp =  $(element).find('td:nth-child(4) span.text-success.small').text().trim();
+    const sellingPriceDown =  $(element).find('td:nth-child(4) span.text-danger.small').text().trim();
+    const sellingPriceNotChange = $(element).find('td:nth-child(4) span.text-warning.small').text().trim();
+
+    data.push({ system, type, buyingPrice, buyingPriceUp, buyingPriceDown, buyingPriceNotChange, sellingPrice, sellingPriceUp, sellingPriceDown, sellingPriceNotChange });
+  });
+  res.json({data});
+}
+
+const goldPriceMiHong = async(req, res) => {
+  const url = `${URLsToVisit}gia-vang.html`;
+  const pageHTML = await axios.get(url);
+  // initializing cheerio on the current webpage
+  const $ = cheerio.load(pageHTML.data);
+  let data = [];
+  $('div.blog__content div.table-responsive:nth(2) table tbody tr:not(:last-child)').each((index, element) => {
+    const system = $(element).find('td:first').text().trim();
+    const type  = $(element).find('td:nth-child(2)').text().trim();
+
+    const buyingPriceTag = $(element).find('td:nth-child(3) span').parent().contents();
+    const buyingPrice = $(buyingPriceTag[Array.prototype.findIndex.call(buyingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const buyingPriceUp = $(element).find('td:nth-child(3) span.text-success.small').text().trim();
+    const buyingPriceDown = $(element).find('td:nth-child(3) span.text-danger.small').text().trim();
+    const buyingPriceNotChange = $(element).find('td:nth-child(3) span.text-warning.small').text().trim();
+
+    const sellingPriceTag =  $(element).find('td:nth-child(4) span').parent().contents();
+    const sellingPrice = $(sellingPriceTag[Array.prototype.findIndex.call(sellingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const sellingPriceUp =  $(element).find('td:nth-child(4) span.text-success.small').text().trim();
+    const sellingPriceDown =  $(element).find('td:nth-child(4) span.text-danger.small').text().trim();
+    const sellingPriceNotChange = $(element).find('td:nth-child(4) span.text-warning.small').text().trim();
+
+    data.push({ system, type, buyingPrice, buyingPriceUp, buyingPriceDown, buyingPriceNotChange, sellingPrice, sellingPriceUp, sellingPriceDown, sellingPriceNotChange });
+  });
+  res.json({data});
+}
+
+const goldPriceBTMC = async(req, res) => {
+  const url = `${URLsToVisit}gia-vang.html`;
+  const pageHTML = await axios.get(url);
+  // initializing cheerio on the current webpage
+  const $ = cheerio.load(pageHTML.data);
+  let data = [];
+  $('div.blog__content div.table-responsive:nth(1) table tbody tr:not(:last-child)').each((index, element) => {
+    const system = $(element).find('td:first').text().trim();
+    const type  = $(element).find('td:nth-child(2)').text().trim();
+
+    const buyingPriceTag = $(element).find('td:nth-child(3) span').parent().contents();
+    const buyingPrice = $(buyingPriceTag[Array.prototype.findIndex.call(buyingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const buyingPriceUp = $(element).find('td:nth-child(3) span.text-success.small').text().trim();
+    const buyingPriceDown = $(element).find('td:nth-child(3) span.text-danger.small').text().trim();
+    const buyingPriceNotChange = $(element).find('td:nth-child(3) span.text-warning.small').text().trim();
+
+    const sellingPriceTag =  $(element).find('td:nth-child(4) span').parent().contents();
+    const sellingPrice = $(sellingPriceTag[Array.prototype.findIndex.call(sellingPriceTag,function(elem){return $(elem).is($('td'));})+1]).text().replace(/\n/g,'').trim();
+    const sellingPriceUp =  $(element).find('td:nth-child(4) span.text-success.small').text().trim();
+    const sellingPriceDown =  $(element).find('td:nth-child(4) span.text-danger.small').text().trim();
+    const sellingPriceNotChange = $(element).find('td:nth-child(4) span.text-warning.small').text().trim();
+
+    data.push({ system, type, buyingPrice, buyingPriceUp, buyingPriceDown, buyingPriceNotChange, sellingPrice, sellingPriceUp, sellingPriceDown, sellingPriceNotChange });
+  });
+  res.json({data});
+}
+
 const goldPriceDoji = async (req, res) => {
   const url = `${URLsToVisit}gia-vang.html`;
   const pageHTML = await axios.get(url);
@@ -214,4 +403,11 @@ module.exports = {
   worldOilPrices,
   goldPriceDoji,
   exchangeRateVietcomBank,
+  goldPriceBTMC,
+  goldPriceMiHong,
+  goldPriceNgocHai,
+  goldPriceSJC,
+  goldPricePNJ,
+  goldPriceNgocTham,
+  goldPriceSinhDien,
 };
